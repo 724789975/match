@@ -59,9 +59,9 @@ TreeNode<T>* TreeNode<T>::GetChildNode(const T& crefKey)
 template <class T>
 const TreeNode<T> *TreeNode<T>::GetChildNode (const T& crefKey) const
 {
-	for (std::vector< TreeNode<T>* >::iterator iter = m_vecNodes.begin(); iter != m_vecNodes.end(); ++iter)
+	for (std::vector< TreeNode<T>* >::const_iterator iter = m_vecNodes.begin(); iter != m_vecNodes.end(); ++iter)
 	{
-		if ((*iter)->m_tData == crefData)
+		if ((*iter)->m_tData == crefKey)
 		{
 			return *iter;
 		}

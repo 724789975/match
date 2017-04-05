@@ -1,6 +1,6 @@
-#include "matchgroup.h"
+﻿#include "matchgroup.h"
 
-#define EXTENDTIME 5.0f
+#define EXTENDTIME 1.0f
 
 
 MatchGroup::MatchGroup()
@@ -11,15 +11,12 @@ MatchGroup::~MatchGroup()
 {
 }
 
-void MatchGroup::Initialize(unsigned int dwId, unsigned int dwLevel)
+void MatchGroup::Initialize(unsigned int dwId, unsigned int dwLevel, unsigned int dwCount)
 {
+	Reset();
 	m_dwId = dwId;
 	m_dwMaxLevel = m_dwMinLevel = dwLevel;
-	m_oExtendFlag.Reset();
-	m_dwWeights = 0;
-	m_fUpweightTimeOut = 0.0f;
-	m_fExtendTimeOut = 0.0f;
-	m_dwExtendTimes = 0;
+	m_dwWeights = m_dwCount = dwCount;
 }
 
 void MatchGroup::Reset()

@@ -1,4 +1,4 @@
-#ifndef __MatchGroup_H__
+﻿#ifndef __MatchGroup_H__
 #define __MatchGroup_H__
 
 #include "TByteSet.h"
@@ -28,11 +28,15 @@ public:
 	virtual ~MatchGroup();
 
 public:
-	void Initialize(unsigned int dwId, unsigned int dwLevel);
+	void Initialize(unsigned int dwId, unsigned int dwLevel, unsigned int dwCount);
 	void Reset();
 
 	void Update(double fDeltaTime);
 	unsigned int GetWeights() const { return m_dwWeights; }
+	unsigned int GetCount() const { return m_dwCount; }
+	unsigned int GetId()const { return m_dwId; }
+	unsigned int GetMinLevel() const { return m_dwMinLevel; }
+	unsigned int GetMaxLevel() const { return m_dwMaxLevel; }
 
 	bool Matching(const MatchGroup& oMatchGroup);
 
@@ -41,6 +45,8 @@ private:
 
 private:
 	unsigned int m_dwId;
+
+	unsigned int m_dwCount;
 
 	unsigned int m_dwMinLevel;
 	unsigned int m_dwMaxLevel;

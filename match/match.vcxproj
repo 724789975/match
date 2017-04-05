@@ -152,6 +152,7 @@
     <ClCompile Include="matchstack.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dynamicpoolex.h" />
     <ClInclude Include="matchgroup.h" />
     <ClInclude Include="matchingtree.h" />
     <ClInclude Include="matchmrocessor.h" />
