@@ -129,6 +129,50 @@ void array_u(FixedArray<T, N> x, int n, int m, std::vector< FixedArray<T, N> >& 
 }
 
 template <class T, unsigned int N>
+void reverse(FixedArray<T, N>& x, int from, int to)
+{
+	while (from < to)
+	{
+		x[from] = x[from] ^ x[to];
+		x[to] = x[from] ^ x[to];
+		x[from] = x[from] ^ x[to];
+		
+		++from;
+		--to;
+	}
+}
+
+template <class T, unsigned int N>
+bool array_u2(FixedArray<T, N>& x)
+{
+	int i = 0; int j = 0; int m = 0;
+	for (i = x.GetSize() - 2; i >= 0; --i)
+	{
+		if (x[i + 1] > x[i])
+		{
+			break;
+		}
+	}
+	if (i < 0)
+	{
+		return false;
+	}
+	m = i;
+	++i;
+	for (j = x.GetSize() - 1; j > i; --j)
+	{
+		if (x[j] > x[m])
+		{
+			break;
+		}
+	}
+	std::swap(x[j], x[m]);
+	reverse(x, m + 1, x.GetSize() - 1);
+	return true;
+}
+
+
+template <class T, unsigned int N>
 void split_n(int n, int m, std::vector< FixedArray<T, N> >& refvecOut, bool bIncludeN = false)
 {
 	static FixedArray<T, N + 1> x;
@@ -217,7 +261,12 @@ void MatchProcessor::BuildMatchingTree()
 
 		for (TeamFixedArrayVec::iterator iter = vecTeamExpr.begin(); iter != vecTeamExpr.end(); ++iter)
 		{
-			array_u(*iter, iter->GetSize(), 1, vecAllTeamExpr);
+			//array_u(*iter, iter->GetSize(), 1, vecAllTeamExpr);
+			auto arr = *iter;
+			do 
+			{
+				vecAllTeamExpr.push_back(arr);
+			} while (array_u2(arr));
 		}
 
 		for (TeamFixedArrayVec::iterator iter = vecAllTeamExpr.begin(); iter != vecAllTeamExpr.end(); ++iter)
